@@ -164,7 +164,7 @@ class MaxClient(AsyncInitializerMixin):
                     if response_future in requests:
                         requests.remove(response_future)
 
-    async def send_and_receive(self, ver: int = 11, opcode: int = 1, cmd: int = 0, payload: dict | str = None):
+    async def send_and_receive(self, ver: int = 11, opcode: int = 1, cmd: int = 0, payload: dict | str = None) -> tuple:
         request = {
             'ver': ver,
             'opcode': opcode,

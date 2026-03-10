@@ -235,6 +235,48 @@ class MaxApi(AsyncInitializerMixin):
         self.phone = get_dict_value_by_path('phone', contact)
         self.update_time = get_dict_value_by_path('updateTime', contact)
 
+
+
+    async def get_users(self, contact_ids: list[int] | int) -> list[dict[str, str]] | None:
+        self.__logger.debug('Getting User')
+        if isinstance(contact_ids, int):
+            contact_ids = [contact_ids]
+
+        response = await self.max_client.send_and_receive(opcode=Opcode.CONTACT_INFO.value, payload={
+            "contactIds": contact_ids,
+        })
+
+
+        contacts_raw = get_dict_value_by_path('payload contacts', response[0][0])
+
+
+        contacts = []
+
+        if not contacts_raw:
+            return None
+
+        for contact in contacts_raw:
+            contact: dict
+
+            names = get_dict_value_by_path('names', contact)
+            if not names:
+                names = [{}]
+
+            pprint(contact)
+            contacts.append({
+                'base_url': get_dict_value_by_path('baseUrl', contact),
+                'id': get_dict_value_by_path('id', contact),
+                'name': get_dict_value_by_path('name', names[0]),
+                'first_name': get_dict_value_by_path('firstName', names[0]),
+                'last_name': get_dict_value_by_path('lastName', names[0]),
+                'photo_id': get_dict_value_by_path('photoId', contact),
+                'base_raw_url': get_dict_value_by_path('baseRawUrl', contact),
+            })
+
+        return contacts
+
+
+
     async def _get_user_data(self) -> None:
         self.__logger.info('Getting User Data...')
         response = await self.max_client.send_and_receive(opcode=Opcode.GET_USER_DATA.value,

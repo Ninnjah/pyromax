@@ -3,3 +3,4 @@
 pyromax.egg-info/*
 __pycache__
 bot.py
+tokens.json

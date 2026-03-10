@@ -4,6 +4,7 @@ class Opcode(Enum):
     PING = 1
     SEND_USER_AGENT = 6
     AUTHORIZE = 19
+    CONTACT_INFO = 32
     CHAT_INFO = 48
     GET_CHAT_MESSAGES_PER_CHUNK = 49
     SEND_MESSAGE = 64
