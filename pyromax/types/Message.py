@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 class Message(Update, ReplyMixin):
     id: str
     text: str
-    sender: int
+    sender: int | None = Field(default=None)
     time: int
     type: str
     attaches: list

@@ -6,6 +6,7 @@ class Opcode(Enum):
     AUTHORIZE = 19
     CONTACT_INFO = 32
     CHAT_INFO = 48
+    GET_CHAT = 48
     GET_CHAT_MESSAGES_PER_CHUNK = 49
     SEND_MESSAGE = 64
     GET_MESSAGE = 71
