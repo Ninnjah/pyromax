@@ -8,8 +8,10 @@ from pyromax.types.OpcodeEnum import Opcode
 
 class Chat(BaseModel):
     max_api: Any
-    id: int = None
+    id: int | None = None
     owner: int
+    title: str
+    description: str | None = None
     participants: dict
     status: str
     type: str
