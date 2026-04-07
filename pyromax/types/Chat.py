@@ -10,7 +10,7 @@ class Chat(BaseModel):
     max_api: Any
     id: int | None = None
     owner: int
-    title: str
+    title: str | None = None
     description: str | None = None
     participants: dict
     status: str
